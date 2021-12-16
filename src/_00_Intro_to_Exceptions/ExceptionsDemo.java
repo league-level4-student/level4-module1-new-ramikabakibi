@@ -1,5 +1,7 @@
 package _00_Intro_to_Exceptions;
 
+import javax.swing.JOptionPane;
+
 public class ExceptionsDemo {
 
     /*
@@ -39,7 +41,23 @@ public class ExceptionsDemo {
     public static void main(String[] args) {
 
         // 1. Create a try/catch block (Hint: type "try" and ctrl + space).
-
+    	try {
+		testFiveOrGreater(4);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+    	
+    	try {
+			testPositive(-1);
+		} catch (NegativeNumberException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			e.scaryPopUp();
+		}
+    	finally {
+    		JOptionPane.showMessageDialog(null, "Your computer is chill");
+    	}
         /*
          * 2. Call the testFiveOrGreater method with a value less than 5 inside
          * the try block.
@@ -68,7 +86,13 @@ public class ExceptionsDemo {
      * 7. Create a static method in this class called testPositive. It should
      * take a single number as a parameter and throw a NegativeNumberException
      * if that number is negative.
-     * 
+     */
+    static void testPositive(int x) throws NegativeNumberException {
+		if(x<0) {
+			throw new NegativeNumberException();
+		}
+	}
+     /* 
      * 8. Call the testPositive method with a negative number inside of a the
      * main method. Make sure your catch block can catch a
      * NegativeNumberException.
