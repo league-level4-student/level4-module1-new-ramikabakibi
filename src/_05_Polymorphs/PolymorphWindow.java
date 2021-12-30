@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -52,16 +54,16 @@ import javax.swing.Timer;
  *  clicked. Hint: MouseListener interface.
  */
 
-public class PolymorphWindow extends JPanel implements ActionListener {
-
+public class PolymorphWindow extends JPanel implements ActionListener{
+	
     public static final int WIDTH = 900;
     public static final int HEIGHT = 600;
 
     private JFrame window;
     private Timer timer;
-
-    Polymorph bluePoly;
-
+    ArrayList<Polymorph> polymorphs;
+    MousePolymorph mouse=new MousePolymorph(50, 50);
+    DialogMorph dialog=new DialogMorph(50, 50);
     public static void main(String[] args) {
         new PolymorphWindow().buildWindow();
     }
@@ -73,9 +75,10 @@ public class PolymorphWindow extends JPanel implements ActionListener {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.pack();
         window.setVisible(true);
-
-        bluePoly = new BluePolymorph(50, 50);
-
+        polymorphs=new ArrayList<Polymorph>();
+       window.addMouseMotionListener(mouse);
+       window.addMouseListener(dialog);
+        polymorphs.add(mouse);
         timer = new Timer(1000 / 30, this);
         timer.start();
     }
@@ -84,15 +87,15 @@ public class PolymorphWindow extends JPanel implements ActionListener {
         // draw background
         g.setColor(Color.LIGHT_GRAY);
         g.fillRect(0, 0, 500, 500);
-
+     mouse.draw(g);
         // draw polymorph
-        bluePoly.draw(g);
+       
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
-        bluePoly.update();
+        
 
     }
 }
