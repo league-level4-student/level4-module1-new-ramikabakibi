@@ -6,7 +6,29 @@ public abstract class Doctor {
 	protected ArrayList<Patient> patients=new ArrayList<Patient>();
 	public abstract boolean getPerformsSurgery();
 	public abstract boolean getMakesHouseCalls();
-	public abstract void assignPatient(Patient patient ) throws DoctorFullException;
-	public abstract ArrayList<Patient> getPatients();
-	public abstract void doMedicine();
+	public  void assignPatient(Patient patient ) throws DoctorFullException{
+	
+			// TODO Auto-generated method stub
+			if(patients.size()<3) {
+			patients.add(patient);
+			}
+			else if(patients.size()>=3) {
+				throw new DoctorFullException();
+			}
+		}
+	
+	public  ArrayList<Patient> getPatients(){
+		
+			// TODO Auto-generated method stub
+			return patients;
+		}
+	
+	public  void doMedicine() {
+		
+			// TODO Auto-generated method stub
+			for(Patient e: patients) {
+				e.checkPulse();
+			}
+		}
+	
 }
